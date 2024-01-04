@@ -39,6 +39,8 @@ typedef __uint64_t  Ne_uint64_t;
 typedef float       Ne_float_t;
 typedef double      Ne_double_t;
 
+typedef const char* Ne_string_t;
+
 typedef intptr_t Ne_intptr_t;
 typedef Ne_intptr_t Ne_size_t;
 typedef Ne_size_t Ne_hash_t;

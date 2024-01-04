@@ -92,3 +92,14 @@ int NeTypeObject_Ready(NeTypeObject* type)
     ReadyStopReadying(type);
     return -1;
 }
+
+int NeTypeObject_IsSubtype(const NeTypeObject* a, const NeTypeObject* b)
+{
+    do
+    {
+        if (a == b)
+            return 1;
+        a = a->typ_base;
+    } while (a != NULL);
+    return (b == &NeBaseType);
+}

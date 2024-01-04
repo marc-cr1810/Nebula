@@ -29,6 +29,9 @@ typedef struct _type_object
     freefunc typ_free;
 } NeTypeObject;
 
+#define NeTypeObject_CAST(op) ((NeTypeObject*)(op))
+#define NeTypeObject_CAST_CONST(op) ((const NeTypeObject*)(op))
+
 /*
  *  Functions
 */
@@ -37,6 +40,11 @@ int NeTypeObject_Ready(NeTypeObject* type);
 
 static inline int NeTypeObject_IsType(const NeObject* obj, const NeTypeObject* type) { return NeObject_TYPE(obj) == type; }
 #define NeTypeObject_IS_TYPE(obj, type) NeTypeObject_IsType(NeObject_CAST_CONST(obj), type)
+
+int NeTypeObject_IsSubtype(const NeTypeObject* a, const NeTypeObject* b);
+#define NeTypeObject_IS_SUBTYPE(obj_a, obj_b) NeTypeObject_IsSubtype(NeTypeObject_CAST_CONST(obj_a), NeTypeObject_CAST_CONST(obj_b))
+
+#define NeTypeObject_TypeCheck(obj, type) (NeTypeObject_IS_TYPE(obj, type) || NeTypeObject_IS_SUBTYPE(NeObject_TYPE(obj), type))
 
 /*
  *	Type object flags

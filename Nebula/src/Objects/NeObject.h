@@ -79,6 +79,9 @@ typedef struct _var_object
 #define NeVarObject_CAST(op) ((NeVarObject*)(op))
 #define NeVarObject_CAST_CONST(op) ((const NeVarObject*)(op))
 
+static inline void NeVarObject_SetSize(NeVarObject* obj, Ne_size_t size) { obj->obj_size = size; }
+#define NeVarObject_SET_SIZE(obj, size) NeVarObject_SetSize(NeVarObject_CAST(obj), size)
+
 #pragma endregion
 
 #pragma region Misc

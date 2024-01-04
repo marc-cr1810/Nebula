@@ -6,7 +6,8 @@ static NeTypeObject* s_StaticTypes[] =
 {
     &NeBaseType,
 
-    &NeIntType
+    &NeIntType,
+    &NeStringType
 };
 
 static NeStatus InitTypes()

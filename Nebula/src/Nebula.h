@@ -10,5 +10,6 @@
 #include "Objects/NeTypeObject.h"
 #include "Objects/NeBaseObject.h"
 #include "Objects/NeIntObject.h"
+#include "Objects/NeStringObject.h"
 
 #endif
