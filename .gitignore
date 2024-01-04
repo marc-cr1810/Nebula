@@ -1,0 +1,9 @@
+# Folders
+bin/
+bin-int/
+
+# Visual Studio
+.vscode/
+
+# Files
+**/Makefile
