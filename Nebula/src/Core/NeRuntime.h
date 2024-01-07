@@ -25,6 +25,9 @@ extern NeRuntimeState NeRuntime;
 NeAPI_FUNC(NeStatus) NeRuntime_Init();
 NeAPI_FUNC(void) NeRuntime_Finalize();
 
+NeAPI_FUNC(NeInterpreterState*) NeRuntime_GetInterpreterState();
+NeAPI_FUNC(NeThreadState*) NeRuntime_GetThreadState();
+
 #ifdef __cplusplus
 }
 #endif

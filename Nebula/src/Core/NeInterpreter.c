@@ -16,3 +16,8 @@ NeInterpreterState* NeInterpreterState_New()
 
     return interp;
 }
+
+NeInterpreterState* NeInterpreterState_Get()
+{
+    return NeRuntime_GetInterpreterState();
+}

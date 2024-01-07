@@ -9,8 +9,10 @@ int NeMain_Run(int argc, char *argv[])
     return status.exit_code;
   }
 
-  NeObject* str = NeStringObject_FromFormat("Hello world! %i", 10);
-  printf(NeString_Cast(str)->obj_value);
+  NeObject* intObj = NeIntObject_FromInt(420);
+  NeObject* str = NeStringObject_FromCharArray("Hello world! ");
+  str = NeStringObject_Concat(str, NeObject_TO_STRING(intObj));
+  NeObject_PRINT(str);
 
   status = NeCore_Finalize();
   if (NeStatus_IsError(status))

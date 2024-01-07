@@ -1,6 +1,8 @@
 #include "NeError.h"
 
+#include "port.h"
 #include "Memory/Memory.h"
+#include "Core/NeThread.h"
 #include "Objects/NeStringObject.h"
 
 void NeError_Set(NeObject* exception)
@@ -20,7 +22,7 @@ void NeError_SetObject(NeObject* exception, NeObject* value)
     NeExceptionObject* exc = NeException_SafeCast(exception);
     NeObject_INC_REF(value);
     exc->obj_context = value;
-    NeError_Restore(exc);
+    NeError_RESTORE(exc);
 }
 
 void NeError_SetString(NeObject* exception, Ne_string_t str)
@@ -35,9 +37,16 @@ void NeError_Clear()
     NeError_Restore(NULL);
 }
 
-void NeError_Restore()
+void NeError_Restore(NeObject* exception)
 {
+    NeThreadState* thread = NeThreadState_Get();
+    NeObject* oldException;
 
+    oldException = thread->currentException;
+    thread->currentException = exception;
+
+    NeObject_INC_REF(exception);
+    NeObject_DEC_REF(oldException);
 }
 
 void NeError_Format(NeObject* exception, Ne_string_t format, ...)
@@ -74,10 +83,22 @@ void NeError_FatalString(Ne_string_t msg)
 
 void NeError_Print()
 {
+    NeThreadState* thread = NeThreadState_Get();
+    assert(thread != NULL);
 
+    if (!NeError_Occured())
+        return;
+    
+    NeExceptionObject* exc = NeException_SafeCast(thread->currentException);
+    Ne_string_t name = exc->obj_typeStr;
+    Ne_string_t context = NeString_SafeCast(exc->obj_context)->obj_value;
+
+    printf("\n%s: %s", name, context);
 }
 
 NeObject* NeError_Occured()
 {
-
+    NeThreadState* thread = NeThreadState_Get();
+    assert(thread != NULL);
+    return thread->currentException;
 }

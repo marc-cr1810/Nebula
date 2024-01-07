@@ -5,8 +5,11 @@
 extern "C" {
 #endif
 
+#include "port.h"
 #include "Objects/NeObject.h"
 
+typedef NeObject* (*strRepr)(NeObject*);
+typedef Ne_hash_t (*hashFunc)(NeObject*);
 typedef void (*freefunc)(void*);
 typedef void (*destructor)(NeObject*);
 
@@ -22,7 +25,8 @@ typedef struct _type_object
     unsigned long typ_flags;
 
     // Methods
-
+    strRepr typ_strRepr;
+    hashFunc typ_hash;
     destructor typ_dealloc;
 
     struct _type_object* typ_base;

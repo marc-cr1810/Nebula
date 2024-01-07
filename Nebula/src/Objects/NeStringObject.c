@@ -1,6 +1,15 @@
 #include "NeStringObject.h"
 
 #include "Memory/Memory.h"
+#include "Error/NeError.h"
+
+static NeObject* StringObject_StrRepr(NeObject* self)
+{
+    NeObject* repr = NeStringObject_FromCharArray("\"");
+    repr = NeStringObject_Concat(repr, self);
+    repr = NeStringObject_ConcatString(repr, "\"");
+    return repr;
+}
 
 NeTypeObject NeStringType = {
     NeVarObject_HEAD_INIT(&NeStringType, 0),
@@ -9,6 +18,8 @@ NeTypeObject NeStringType = {
     .typ_size = sizeof(NeStringObject),
     .typ_itemSize = 0,
     .typ_flags = TPFLAGS_DEFAULT | TPFLAGS_BASETYPE,
+    .typ_strRepr = StringObject_StrRepr,
+    .typ_hash = NULL,
     .typ_dealloc = NULL,
     .typ_base = NULL,
     .typ_free = NULL
@@ -26,7 +37,7 @@ NeObject* NeStringObject_FromCharArrayAndSize(Ne_string_t str, Ne_size_t size)
 
     if (size < 0)
     {
-        // TODO: Print error
+        NeError_SET_STRING(&NeTypeErrorException, "negative size passed to NeStringObject_FromCharArrayAndSize");
         return NULL;
     }
 
@@ -85,7 +96,7 @@ NeObject* NeStringObject_Concat(NeObject* a, NeObject* b)
 {
     if (!NeString_Check(a) || !NeString_Check(b))
     {
-        // TODO: report error
+        NeError_SET_STRING(&NeTypeErrorException, "can only conncatinate strings");
         return NULL;
     }
 

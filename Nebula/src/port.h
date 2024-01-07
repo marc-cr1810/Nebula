@@ -75,4 +75,6 @@ typedef Ne_size_t Ne_hash_t;
 #   define NeAPI_DATA(RTYPE) extern RTYPE
 #endif
 
+#include "config.h"
+
 #endif

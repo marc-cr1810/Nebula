@@ -57,8 +57,14 @@ static int ReadyInherit(NeTypeObject* type)
     if (base == NULL)
         return -1;
 
+    if (type->typ_strRepr == NULL)
+        type->typ_strRepr = base->typ_strRepr;
+
+    if (type->typ_hash == NULL)
+        type->typ_hash = base->typ_hash;
+
     if (type->typ_dealloc == NULL)
-        type->typ_dealloc == base->typ_dealloc;
+        type->typ_dealloc = base->typ_dealloc;
 
     if (type->typ_free == NULL)
         type->typ_free = base->typ_free;

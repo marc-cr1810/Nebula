@@ -19,6 +19,8 @@ typedef struct _interpreter_state
 
 NeAPI_FUNC(NeInterpreterState*) NeInterpreterState_New();
 
+NeAPI_FUNC(NeInterpreterState*) NeInterpreterState_Get();
+
 #ifdef __cplusplus
 }
 #endif

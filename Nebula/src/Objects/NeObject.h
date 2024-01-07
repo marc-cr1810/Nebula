@@ -55,6 +55,15 @@ void NeObject_DecRef(NeObject* obj);
 static inline void NeObject_SetType(NeObject* obj, NeTypeObject* type) { obj->obj_type = type; }
 #define NeObject_SET_TYPE(obj, type) NeObject_SetType(NeObject_CAST(obj), type)
 
+NeObject* NeObject_ToString(NeObject* obj);
+#define NeObject_TO_STRING(obj) NeObject_ToString(NeObject_CAST(obj))
+
+void NeObject_Print(NeObject* obj);
+#define NeObject_PRINT(obj) NeObject_Print(NeObject_CAST(obj))
+
+Ne_hash_t NeObject_Hash(NeObject* obj);
+#define NeObject_HASH(obj) NeObject_Hash(NeObject_CAST(obj))
+
 #pragma endregion
 
 #pragma region "Nebula Variable-sized Object"

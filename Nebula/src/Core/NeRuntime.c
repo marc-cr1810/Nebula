@@ -23,3 +23,14 @@ void NeRuntime_Finalize()
 
     NeRuntime.initialized = 0;
 }
+
+
+NeInterpreterState* NeRuntime_GetInterpreterState()
+{
+    return NeRuntime.interpMain;
+}
+
+NeThreadState* NeRuntime_GetThreadState()
+{
+    return NeRuntime.interpMain->thread;
+}
