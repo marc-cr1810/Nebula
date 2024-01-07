@@ -77,7 +77,7 @@ NeObject* NeStringObject_ConcatString(NeObject* a, Ne_string_t b)
 {
     NeObject* bStr = NeStringObject_FromCharArray(b);
     NeObject* result = NeStringObject_Concat(a, bStr);
-    NEObject_DEC_REF(bStr);
+    NeObject_DEC_REF(bStr);
     return result;
 }
 

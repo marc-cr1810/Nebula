@@ -50,7 +50,7 @@ void NeObject_IncRef(NeObject* obj);
 #define NeObject_INC_REF(obj) NeObject_IncRef(NeObject_CAST(obj))
 
 void NeObject_DecRef(NeObject* obj);
-#define NEObject_DEC_REF(obj) NeObject_DecRef(NeObject_CAST(obj))
+#define NeObject_DEC_REF(obj) NeObject_DecRef(NeObject_CAST(obj))
 
 static inline void NeObject_SetType(NeObject* obj, NeTypeObject* type) { obj->obj_type = type; }
 #define NeObject_SET_TYPE(obj, type) NeObject_SetType(NeObject_CAST(obj), type)

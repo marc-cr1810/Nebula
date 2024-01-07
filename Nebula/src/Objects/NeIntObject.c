@@ -2,25 +2,15 @@
 
 #include "Memory/Memory.h"
 
-
-/*
- * Methods
-*/
-
-static void IntDealloc(NeIntObject* self)
-{
-	NeObject_TYPE(self)->typ_free((NeObject*)self);
-}
-
 NeTypeObject NeIntType = {
     NeVarObject_HEAD_INIT(&NeIntType, 0),
     .typ_name = "int",
     .typ_doc = "An integer object",
     .typ_size = sizeof(NeIntObject),
     .typ_flags = TPFLAGS_DEFAULT | TPFLAGS_BASETYPE,
-    .typ_dealloc = (destructor)IntDealloc,
+    .typ_dealloc = NULL,
     .typ_base = NULL,
-    .typ_free = Mem_Free
+    .typ_free = NULL
 };
 
 /*
